@@ -35,35 +35,39 @@ def drawR(startx, starty):
     t.fillcolor("lightblue")
     t.begin_fill()
 
-
-    t.setheading(90)
-    t.forward(90)
-
-
-    t.right(90)
-    t.forward(10)
-    t.circle(-15, 180)
-
-    t.left(120)
-    t.forward(65)
-
-    t.right(90)
-    t.forward(10)
-    t.right(90)
-    t.forward(65)
-    t.penup()
-
-    t.goto(startx, starty)
+    # Part 2: Outer Boundary (Bottom -> Left -> Top -> Outer Loop)
     t.setheading(180)
-    t.pendown()
     t.forward(10)
-
-
     t.right(90)
     t.forward(100)
     t.right(90)
     t.forward(20)
     t.circle(-25, 165)
+
+    # Bridge to Top of Outer Leg
+    # Calculated approximate position of where Part 1 ended
+    # The gap is small, we just draw a line to connect
+    target_x = startx + 1.34
+    target_y = starty + 55
+    t.goto(target_x, target_y)
+
+    # Part 1 Reversed: Outer Leg -> Inner Leg -> Inner Loop -> Stem Right Side
+    t.setheading(300) # Down outer leg
+    t.forward(65)
+    
+    t.setheading(30)  # Bottom of leg
+    t.forward(10)
+    
+    t.setheading(120) # Up inner leg
+    t.forward(65)
+    
+    t.setheading(0)   # Prepare for arc
+    t.circle(15, 180) # Arc back to stem top
+    
+    t.forward(10)     # To stem corner
+    t.left(90)
+    t.forward(90)     # Down stem right side
+
     t.end_fill()
 
 def drawY(start_x,start_y):
